@@ -4242,7 +4242,13 @@ int cryptfs_enable_file()
 int cryptfs_isConvertibleToFBE()
 {
     struct fstab_rec* rec = fs_mgr_get_entry_for_mount_point(fstab, DATA_MNT_POINT);
-    return rec && fs_mgr_is_convertible_to_fbe(rec) ? 1 : 0;
+    // MultiROM secondary ROMs hate fstab assumptions
+    if (!rec) {
+        SLOGE("Can't get fstab record for %s\n", DATA_MNT_POINT);
+        return 0;
+    }
+
+    return fs_mgr_is_convertible_to_fbe(rec) ? 1 : 0;
 }
 
 int cryptfs_create_default_ftr(struct crypt_mnt_ftr* crypt_ftr, __attribute__((unused))int key_length)
