@@ -151,6 +151,10 @@ extern "C" int vold_main(int argc, char** argv) {
     // a deadlock between vold and init (see b/34278978 for details)
     property_set("vold.has_adoptable", has_adoptable ? "1" : "0");
 
+    // This call should go after listeners are started to avoid
+    // a deadlock between vold and init (see b/34278978 for details)
+    property_set("vold.has_adoptable", has_adoptable ? "1" : "0");
+
     // Eventually we'll become the monitoring thread
     while(1) {
         sleep(1000);
