@@ -1,3 +1,5 @@
+LOCAL_CLANG_EXCEPTION_PROJECTS += system/vold
+
 LOCAL_PATH:= $(call my-dir)
 
 common_src_files := \
@@ -104,7 +106,8 @@ include $(CLEAR_VARS)
 
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 LOCAL_MODULE := libvold
-LOCAL_CLANG := true
+LOCAL_CLANG := false
+LOCAL_SDCLANG := false
 LOCAL_SRC_FILES := $(common_src_files)
 LOCAL_C_INCLUDES := $(common_c_includes)
 LOCAL_SHARED_LIBRARIES := $(common_shared_libraries)
@@ -120,7 +123,8 @@ include $(CLEAR_VARS)
 
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 LOCAL_MODULE := vold
-LOCAL_CLANG := true
+LOCAL_CLANG := false
+LOCAL_SDCLANG := false
 LOCAL_SRC_FILES := \
 	main.cpp \
 	$(common_src_files)
